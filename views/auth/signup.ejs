@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .glass-card {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .floating-orb {
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .floating-orb-delayed {
+      animation: float 8s ease-in-out infinite 3s;
+    }
+    
+    .floating-orb-slow {
+      animation: float 10s ease-in-out infinite 1s;
+    }
+    
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+      }
+      50% { 
+        transform: translateY(-25px) rotate(180deg); 
+      }
+    }
+    
+    .gradient-shadow {
+      box-shadow: 0 25px 50px -12px rgba(147, 51, 234, 0.25);
+    }
+    
+    .input-elegant {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    
+    .input-elegant:focus {
+      transform: translateY(-1px);
+      box-shadow: 
+        0 10px 25px rgba(139, 92, 246, 0.15),
+        0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    
+    .btn-elegant {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-elegant:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 20px 40px rgba(102, 126, 234, 0.3),
+        0 0 20px rgba(147, 51, 234, 0.2);
+      background-position: 100% 100%;
+    }
+    
+    .btn-elegant::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .btn-elegant:hover::before {
+      left: 100%;
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .social-btn {
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+    }
+    
+    .social-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .strength-indicator {
+      height: 4px;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      background: #e5e7eb;
+    }
+    
+    .strength-weak { background: linear-gradient(90deg, #ef4444, #f97316); }
+    .strength-medium { background: linear-gradient(90deg, #f59e0b, #eab308); }
+    .strength-strong { background: linear-gradient(90deg, #10b981, #059669); }
+    
+    .checkbox-elegant {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #d1d5db;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .checkbox-elegant:checked {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-color: #667eea;
+    }
+    
+    .checkbox-elegant:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .step-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d1d5db;
+      transition: all 0.3s ease;
+    }
+    
+    .step-indicator.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      transform: scale(1.5);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 relative overflow-hidden">
+  <!-- Animated background elements -->
+  <div class="absolute top-16 left-16 w-40 h-40 bg-gradient-to-r from-blue-300 to-purple-400 rounded-full opacity-30 floating-orb blur-xl"></div>
+  <div class="absolute top-32 right-24 w-32 h-32 bg-gradient-to-r from-pink-300 to-red-300 rounded-full opacity-25 floating-orb-delayed blur-lg"></div>
+  <div class="absolute bottom-24 left-32 w-28 h-28 bg-gradient-to-r from-green-300 to-blue-400 rounded-full opacity-35 floating-orb-slow blur-lg"></div>
+  <div class="absolute bottom-16 right-16 w-36 h-36 bg-gradient-to-r from-yellow-300 to-pink-400 rounded-full opacity-20 floating-orb blur-xl"></div>
+  <div class="absolute top-1/2 left-8 w-24 h-24 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-full opacity-30 floating-orb-delayed blur-md"></div>
+
+  <div class="min-h-screen flex items-center justify-center px-4 py-8 relative z-10">
+    <div class="w-full max-w-lg">
+      <!-- Progress indicator -->
+      <div class="flex justify-center space-x-2 mb-8">
+        <div class="step-indicator active"></div>
+        <div class="step-indicator"></div>
+        <div class="step-indicator"></div>
+      </div>
+
+      <!-- Main card -->
+      <div class="glass-card rounded-3xl shadow-2xl gradient-shadow p-8 relative">
+        <!-- Decorative gradient border -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl opacity-20 blur-sm"></div>
+        <div class="relative">
+          
+          <!-- Header -->
+          <div class="text-center mb-8">
+            <div class="relative">
+              <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 animate-pulse opacity-50"></div>
+                <svg class="w-10 h-10 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                </svg>
+              </div>
+            </div>
+            <h1 class="text-4xl font-bold mb-3">
+              <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Join Our Community
+              </span>
+            </h1>
+            <p class="text-gray-600 font-medium text-lg">Create your account and start your journey</p>
+          </div>
+
+          <!-- Error alert -->
+          <div class="mb-6 p-4 bg-gradient-to-r from-red-50 to-pink-50 border-l-4 border-red-400 rounded-xl hidden" id="error-alert">
+            <div class="flex items-center">
+              <svg class="w-6 h-6 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-red-700 font-semibold">Error message would appear here</span>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <form action="/auth/signup" method="POST" class="space-y-6">
+            <!-- Email field -->
+            <div class="space-y-2">
+              <label for="email" class="block text-sm font-bold text-gray-700 mb-2">
+                Email Address
+              </label>
+              <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <svg class="h-5 w-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required
+                  class="input-elegant w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-0 focus:border-purple-400 bg-white/80 backdrop-blur-sm font-medium placeholder-gray-400 text-gray-800"
+                  placeholder="Enter your email address"
+                >
+              </div>
+            </div>
+
+            <!-- Password field -->
+            <div class="space-y-2">
+              <label for="password" class="block text-sm font-bold text-gray-700 mb-2">
+                Password
+              </label>
+              <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <svg class="h-5 w-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                </div>
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password" 
+                  minlength="6"
+                  required
+                  class="input-elegant w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-0 focus:border-purple-400 bg-white/80 backdrop-blur-sm font-medium placeholder-gray-400 text-gray-800"
+                  placeholder="Create a strong password"
+                >
+              </div>
+              <!-- Password strength indicator -->
+              <div class="mt-2">
+                <div class="strength-indicator w-full" id="strength-bar"></div>
+                <p class="text-xs text-gray-500 mt-1" id="strength-text">Password strength will appear here</p>
+              </div>
+            </div>
+
+            <!-- Terms and conditions -->
+            <div class="flex items-start space-x-3 py-2">
+              <input 
+                type="checkbox" 
+                id="terms" 
+                required
+                class="checkbox-elegant mt-1"
+              >
+              <label for="terms" class="text-sm text-gray-600 leading-relaxed">
+                I agree to the 
+                <a href="#" class="font-semibold text-purple-600 hover:text-purple-700 transition-colors">Terms of Service</a> 
+                and 
+                <a href="#" class="font-semibold text-purple-600 hover:text-purple-700 transition-colors">Privacy Policy</a>
+              </label>
+            </div>
+
+            <!-- Newsletter subscription -->
+            <div class="flex items-start space-x-3 py-2">
+              <input 
+                type="checkbox" 
+                id="newsletter"
+                class="checkbox-elegant mt-1"
+              >
+              <label for="newsletter" class="text-sm text-gray-600 leading-relaxed">
+                Send me updates about new features and exclusive content
+              </label>
+            </div>
+
+            <!-- Submit button -->
+            <button 
+              type="submit" 
+              class="btn-elegant w-full text-white font-bold py-4 px-8 rounded-2xl shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50 relative"
+            >
+              <span class="relative z-10 text-lg">Create My Account</span>
+            </button>
+          </form>
+
+          <!-- Removed social signup buttons to keep email/password only -->
+
+          <!-- Login link -->
+          <div class="text-center">
+            <p class="text-gray-600 text-lg">
+              Already have an account? 
+              <a href="/auth/login" class="font-bold text-purple-600 hover:text-purple-700 transition-colors">
+                Sign in here
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/bottom-nav') %>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Password strength checker
+      const passwordInput = document.getElementById('password');
+      const strengthBar = document.getElementById('strength-bar');
+      const strengthText = document.getElementById('strength-text');
+      
+      passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        let strength = 0;
+        let strengthLabel = '';
+        
+        if (password.length >= 6) strength += 1;
+        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 1;
+        if (password.match(/\d/)) strength += 1;
+        if (password.match(/[^a-zA-Z\d]/)) strength += 1;
+        
+        strengthBar.classList.remove('strength-weak', 'strength-medium', 'strength-strong');
+        
+        if (strength <= 1) {
+          strengthBar.classList.add('strength-weak');
+          strengthLabel = 'Weak password';
+          strengthBar.style.width = '25%';
+        } else if (strength <= 2) {
+          strengthBar.classList.add('strength-medium');
+          strengthLabel = 'Medium strength';
+          strengthBar.style.width = '60%';
+        } else {
+          strengthBar.classList.add('strength-strong');
+          strengthLabel = 'Strong password';
+          strengthBar.style.width = '100%';
+        }
+        
+        strengthText.textContent = password.length > 0 ? strengthLabel : 'Password strength will appear here';
+      });
+
+      // Enhanced form validation
+      const form = document.querySelector('form');
+      const inputs = document.querySelectorAll('input[type="email"], input[type="password"]');
+      
+      inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+          if (this.value && this.checkValidity()) {
+            this.classList.add('border-green-300');
+            this.classList.remove('border-red-300', 'border-gray-200');
+          } else if (this.value && !this.checkValidity()) {
+            this.classList.add('border-red-300');
+            this.classList.remove('border-green-300', 'border-gray-200');
+          }
+        });
+        
+        input.addEventListener('focus', function() {
+          this.classList.remove('border-green-300', 'border-red-300');
+          this.classList.add('border-purple-400');
+        });
+      });
+
+      // Parallax effect for background orbs
+      document.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        const orbs = document.querySelectorAll('.floating-orb, .floating-orb-delayed, .floating-orb-slow');
+        orbs.forEach((orb, index) => {
+          const speed = (index + 1) * 0.3;
+          const x = mouseX * speed * 10;
+          const y = mouseY * speed * 10;
+          orb.style.transform += ` translate(${x}px, ${y}px)`;
+        });
+      });
+
+      // Progress simulation (for demonstration)
+      let step = 1;
+      setTimeout(() => {
+        const indicators = document.querySelectorAll('.step-indicator');
+        if (indicators[1]) indicators[1].classList.add('active');
+      }, 3000);
+      
+      setTimeout(() => {
+        const indicators = document.querySelectorAll('.step-indicator');
+        if (indicators[2]) indicators[2].classList.add('active');
+      }, 6000);
+    });
+  </script>
+</body>
+</html>
